@@ -42,6 +42,8 @@ public class BarStack : MonoBehaviour
         HanoiTower.isSelected = false;
         HanoiTower.cur_donut = null;
 
+        HanoiTower.move_cnt++;
+
         param_donut.transform.position = this.transform.position + Vector3.up * 5f;
         Rigidbody param_donut_rb = param_donut.GetComponent<Rigidbody>();
 

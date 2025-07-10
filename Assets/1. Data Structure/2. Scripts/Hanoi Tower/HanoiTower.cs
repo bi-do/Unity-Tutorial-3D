@@ -1,6 +1,8 @@
 using System.Collections;
+using TMPro;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 
 public class HanoiTower : MonoBehaviour
 {
@@ -9,8 +11,12 @@ public class HanoiTower : MonoBehaviour
     public GameObject[] donut_prefab;
     public BarStack[] bars;
 
+    public TextMeshProUGUI cnt_text;
+
     public static GameObject cur_donut = null;
+    public static BarStack cur_bar = null;
     public static bool isSelected;
+    public static int move_cnt;
 
     void Start()
     {
@@ -29,6 +35,20 @@ public class HanoiTower : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
         }
+        move_cnt = 0;
     }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && cur_donut != null)
+        {
+            cur_bar.bar_stack.Push(cur_donut);
+
+            isSelected = false;
+            cur_donut = null;
+        }
+        this.cnt_text.text = move_cnt.ToString();
+    }
+
 
 }
