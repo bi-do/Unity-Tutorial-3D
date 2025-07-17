@@ -11,4 +11,8 @@ public class Bullet2 : MonoBehaviour
         this.transform.Translate(dir * speed * Time.deltaTime);
     }
 
+    void OnDisable()
+    {
+        PlayerFire.Instance.bullets.Enqueue(this.gameObject);
+    }
 }

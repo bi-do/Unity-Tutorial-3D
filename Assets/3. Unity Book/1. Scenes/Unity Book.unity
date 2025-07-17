@@ -119,6 +119,58 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &37245776
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 37245778}
+  - component: {fileID: 37245777}
+  m_Layer: 0
+  m_Name: Enemy Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &37245777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37245776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a19ca880e67674abe0504a2ca30912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy_pool: []
+  spawn_point_arr:
+  - {fileID: 1426782871}
+  - {fileID: 283361468}
+  - {fileID: 796390027}
+  - {fileID: 1643636467}
+  - {fileID: 684571705}
+  enemy_factory: {fileID: 2252755708403720873, guid: ae037da4a1e7a3241be4ff28addff747, type: 3}
+--- !u!4 &37245778
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37245776}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &44311468
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,27 +329,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 283361468}
-  - component: {fileID: 283361467}
   m_Layer: 0
-  m_Name: Enemy Generator (3)
+  m_Name: Spawm Point
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &283361467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 283361466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6a19ca880e67674abe0504a2ca30912, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy_factory: {fileID: 2252755708403720873, guid: ae037da4a1e7a3241be4ff28addff747, type: 3}
 --- !u!4 &283361468
 Transform:
   m_ObjectHideFlags: 0
@@ -532,27 +570,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 684571705}
-  - component: {fileID: 684571704}
   m_Layer: 0
-  m_Name: Enemy Generator (2)
+  m_Name: Spawm Point
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &684571704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 684571703}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6a19ca880e67674abe0504a2ca30912, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy_factory: {fileID: 2252755708403720873, guid: ae037da4a1e7a3241be4ff28addff747, type: 3}
 --- !u!4 &684571705
 Transform:
   m_ObjectHideFlags: 0
@@ -714,27 +738,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 796390027}
-  - component: {fileID: 796390026}
   m_Layer: 0
-  m_Name: Enemy Generator (4)
+  m_Name: Spawm Point
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &796390026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 796390025}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6a19ca880e67674abe0504a2ca30912, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy_factory: {fileID: 2252755708403720873, guid: ae037da4a1e7a3241be4ff28addff747, type: 3}
 --- !u!4 &796390027
 Transform:
   m_ObjectHideFlags: 0
@@ -1493,6 +1503,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet_factory: {fileID: 4106786899157598389, guid: 6493a1d598ca36549b28fa082f89f911, type: 3}
   fire_pos: {fileID: 1779143920}
+  pool_size: 10
+  bullets: []
 --- !u!1 &1426782869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1502,27 +1514,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1426782871}
-  - component: {fileID: 1426782870}
   m_Layer: 0
-  m_Name: Enemy Generator
+  m_Name: Spawm Point
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1426782870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1426782869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6a19ca880e67674abe0504a2ca30912, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy_factory: {fileID: 2252755708403720873, guid: ae037da4a1e7a3241be4ff28addff747, type: 3}
 --- !u!4 &1426782871
 Transform:
   m_ObjectHideFlags: 0
@@ -1681,7 +1679,7 @@ Transform:
   m_GameObject: {fileID: 1637056475}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 9, z: 0}
+  m_LocalPosition: {x: 0, y: 10.07, z: 0}
   m_LocalScale: {x: 27.70157, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1696,27 +1694,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1643636467}
-  - component: {fileID: 1643636466}
   m_Layer: 0
-  m_Name: Enemy Generator (1)
+  m_Name: Spawm Point
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1643636466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1643636465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6a19ca880e67674abe0504a2ca30912, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy_factory: {fileID: 2252755708403720873, guid: ae037da4a1e7a3241be4ff28addff747, type: 3}
 --- !u!4 &1643636467
 Transform:
   m_ObjectHideFlags: 0
@@ -1994,8 +1978,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cur_score_UI: {fileID: 593355389}
   best_score_UI: {fileID: 1004374162}
-  cur_score: 0
-  best_score: 0
 --- !u!4 &1966336185
 Transform:
   m_ObjectHideFlags: 0
@@ -2173,3 +2155,4 @@ SceneRoots:
   - {fileID: 1123431364}
   - {fileID: 1190249208}
   - {fileID: 1966336185}
+  - {fileID: 37245778}
