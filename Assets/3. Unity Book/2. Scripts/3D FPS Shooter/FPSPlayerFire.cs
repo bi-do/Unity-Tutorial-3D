@@ -1,45 +1,65 @@
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class FPSPlayerFire : MonoBehaviour
 {
-    public Transform fire_pos;
-    public GameObject bomb_prefab;
-
-    public float throw_power = 15f;
-
-    public GameObject bullet_effect;
+    public GameObject firePosition;
+    public GameObject bombFactory;
+    public GameObject bulletEffect;
     private ParticleSystem ps;
+    private Animator anim;
+
+
+    public float throwPower = 15f;
+    public int weaponPower = 5;
+
 
     void Start()
     {
-        this.ps = bullet_effect.GetComponent<ParticleSystem>();
+        anim = this.GetComponentInChildren<Animator>();
+        ps = bulletEffect.GetComponent<ParticleSystem>();
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (FPSGameManager.Instance.gState != FPSGameManager.GameState.Run)
+            return;
+        
+        if (Input.GetMouseButtonDown(0)) // 마우스 왼쪽 버튼 클릭
         {
+            if (anim.GetFloat("MoveMotion") == 0)
+            {
+                anim.SetTrigger("Attack");
+            }
+
+
             Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-            RaycastHit hitInfo = new RaycastHit();
+            RaycastHit hitInfo =  new RaycastHit();
 
             if (Physics.Raycast(ray, out hitInfo))
             {
-                bullet_effect.transform.position = hitInfo.point;
+                if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Enemy")) // Raycast를 Enemy가 맞은 경우
+                {
+                    EnemyFSM eFSM = hitInfo.transform.GetComponent<EnemyFSM>();
+                    eFSM.HitEnemy(weaponPower);
+                }
+                else // Raycast를 맞은 대상이 Enemy가 아닌 경우
+                {
+                    bulletEffect.transform.position = hitInfo.point;
+                    bulletEffect.transform.forward = hitInfo.normal;
 
-                bullet_effect.transform.forward = hitInfo.normal;
-                Debug.Log("쐇어요");
-                print(hitInfo.point + "+" + hitInfo.distance);
-                ps.Play();
+                    ps.Play();
+                }
             }
         }
-
-        if (Input.GetMouseButtonDown(1))
+        
+        if (Input.GetMouseButtonDown(1)) // 마우스 오른쪽 버튼 클릭
         {
-            GameObject bomb = Instantiate(bomb_prefab, fire_pos.position, Quaternion.identity);
+            GameObject bomb = Instantiate(bombFactory);
+            bomb.transform.position = firePosition.transform.position;
 
             Rigidbody rb = bomb.GetComponent<Rigidbody>();
-            rb.AddForce(Camera.main.transform.forward * throw_power, ForceMode.Impulse);
-
+            rb.AddForce(Camera.main.transform.forward * throwPower, ForceMode.Impulse);
         }
     }
 }
