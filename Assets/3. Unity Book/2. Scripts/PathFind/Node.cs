@@ -2,16 +2,20 @@ using System;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class Nodes : IComparable<Nodes>
+public class Node : IComparable<Node>
 {
     public Node parent;
     public Vector3 pos;
 
+    /// <summary> 해당 노드까지 온 비용 </summary>
     public float node_total_cost; // G
+
+    /// <summary> 해당 노드로부터 목적지까지의 추정치 </summary>
     public float estimate_cost;  // H
 
+/// <summary> 장애물 노드인가? </summary>
     public bool is_obstacle;
-    public Nodes()
+    public Node()
     {
         this.parent = null;
         this.node_total_cost = 0;
@@ -19,7 +23,7 @@ public class Nodes : IComparable<Nodes>
         this.is_obstacle = false;
     }
 
-    public Nodes(Vector3 pos)
+    public Node(Vector3 pos)
     {
         this.pos = pos;
         this.parent = null;
@@ -33,12 +37,13 @@ public class Nodes : IComparable<Nodes>
         this.is_obstacle = true;
     }
 
+    // F = G + H
     public float GetFCost()
     {
         return node_total_cost + estimate_cost;
     }
 
-    public int CompareTo(Nodes node)
+    public int CompareTo(Node node)
     {
         float my_f = GetFCost();
         float other_f = node.GetFCost();
