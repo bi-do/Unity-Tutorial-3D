@@ -1,37 +1,38 @@
+using System;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class AgentController : MonoBehaviour
 {
-    private Transform player_tf;
+    public Camera cam;
     private NavMeshAgent agent;
-    public Transform[] points;
-    public int point_index;
-    Vector3 temp;
-
+    public NavMeshSurface surface;
+    
     void Start()
     {
-        this.agent = this.GetComponent<NavMeshAgent>();
-        // this.player_tf = GameObject.FindWithTag("Player").transform;
+        agent = GetComponent<NavMeshAgent>();
+        surface.transform.position = agent.transform.position;
+        surface.BuildNavMesh();
     }
 
     void Update()
     {
-        // this.agent.SetDestination(player_tf.transform.position);
-        this.agent.SetDestination(points[this.point_index].position);
-
-        if (this.agent.remainingDistance <= 1f && this.agent.destination == this.temp)
+        if (Input.GetMouseButtonDown(0))
         {
-            this.temp = this.agent.destination;
-            ++this.point_index;
-            Debug.Log($"목적지 변경 : {this.point_index}");
-            Debug.Log($"현재 목적지 : {this.agent.destination} , temp : {this.temp}");
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
 
-            // int temp = this.point_index;
-            // do
-            // {
-            //     this.point_index = Random.Range(0, points.Length);
-            // } while (temp == this.point_index);
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            {
+                agent.SetDestination(hit.point);
+            }
+        }
+
+        if (Vector3.Distance(transform.position, surface.transform.position) > 4f)
+        {
+            surface.transform.position = agent.transform.position;
+            surface.BuildNavMesh();
         }
     }
 }
