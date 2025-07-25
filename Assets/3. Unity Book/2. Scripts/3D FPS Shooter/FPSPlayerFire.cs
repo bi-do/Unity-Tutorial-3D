@@ -14,10 +14,19 @@ public class FPSPlayerFire : MonoBehaviour
     private ParticleSystem ps;
     private Animator anim;
 
+    public GameObject weapon01_UI;
+    public GameObject weapon02_UI;
+
+    public GameObject crosshair01_UI;
+    public GameObject crosshair02_UI;
+
+    public GameObject weapon01_R_UI;
+    public GameObject weapon02_R_UI;
+
     public TextMeshProUGUI w_mode_text_UI;
     public GameObject[] flash_effects;
 
-    public float throwPower = 15f;
+    public float throwPower = 10f;
     public int weaponPower = 5;
 
     private bool zoom_mode;
@@ -36,6 +45,35 @@ public class FPSPlayerFire : MonoBehaviour
         if (FPSGameManager.Instance.gState != FPSGameManager.GameState.Run)
             return;
 
+        LeftClick();
+        RightClick();
+        WeaponSwap();
+    }
+
+    private void RightClick()
+    {
+        if (Input.GetMouseButtonDown(1)) // 마우스 오른쪽 버튼 클릭
+        {
+            switch (this.w_mode)
+            {
+                case WeaponMode.NORMAL: // Normal 모드일 시 폭탄 투척
+                    GameObject bomb = Instantiate(bombFactory);
+                    bomb.transform.position = firePosition.transform.position;
+
+                    Rigidbody rb = bomb.GetComponent<Rigidbody>();
+                    rb.AddForce((Camera.main.transform.forward + Camera.main.transform.up * 0.5f)
+                                * throwPower, ForceMode.Impulse);
+                    break;
+                case WeaponMode.Sniper: // Sniper 모드일 시 마우스 우클릭 -> 확대/축소 조준경
+                    Camera.main.fieldOfView = this.zoom_mode == true ? 60f : 15f;
+                    this.zoom_mode = !this.zoom_mode;
+                    break;
+            }
+        }
+    }
+
+    private void LeftClick()
+    {
         if (Input.GetMouseButtonDown(0)) // 마우스 왼쪽 버튼 클릭
         {
             if (anim.GetFloat("MoveMotion") == 0)
@@ -64,27 +102,7 @@ public class FPSPlayerFire : MonoBehaviour
                 }
             }
         }
-
-        if (Input.GetMouseButtonDown(1)) // 마우스 오른쪽 버튼 클릭
-        {
-            switch (this.w_mode)
-            {
-                case WeaponMode.NORMAL: // Normal 모드일 시 폭탄 투척
-                    GameObject bomb = Instantiate(bombFactory);
-                    bomb.transform.position = firePosition.transform.position;
-
-                    Rigidbody rb = bomb.GetComponent<Rigidbody>();
-                    rb.AddForce(Camera.main.transform.forward * throwPower, ForceMode.Impulse);
-                    break;
-                case WeaponMode.Sniper: // Sniper 모드일 시 마우스 우클릭 -> 확대/축소 조준경
-                    Camera.main.fieldOfView = this.zoom_mode == true ? 60f : 15f;
-                    this.zoom_mode = !this.zoom_mode;
-                    break;
-            }
-        }
-        WeaponSwap();
     }
-
 
     private void WeaponSwap()
     {
@@ -93,12 +111,27 @@ public class FPSPlayerFire : MonoBehaviour
             this.w_mode = WeaponMode.NORMAL;
             Camera.main.fieldOfView = 60f;
             this.w_mode_text_UI.text = "Normal Mode";
+            WeaponUIUpdate(true);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             this.w_mode = WeaponMode.Sniper;
             this.w_mode_text_UI.text = "Sniper Mode";
+            WeaponUIUpdate(false);
         }
+
+    }
+
+    private void WeaponUIUpdate(bool isNormal)
+    {
+        this.weapon01_UI.SetActive(isNormal);
+        this.weapon02_UI.SetActive(!isNormal);
+
+        this.crosshair01_UI.SetActive(isNormal);
+        this.crosshair02_UI.SetActive(!isNormal);
+
+        this.weapon01_R_UI.SetActive(isNormal);
+        this.weapon02_R_UI.SetActive(!isNormal);
     }
 
     IEnumerator ShootEffectOn(float duration)
@@ -110,5 +143,5 @@ public class FPSPlayerFire : MonoBehaviour
         yield return new WaitForSeconds(duration);
 
         this.flash_effects[num].SetActive(false);
-    }   
+    }
 }
