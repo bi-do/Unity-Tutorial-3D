@@ -5,6 +5,7 @@ using UnityEngine.PlayerLoop;
 
 public class FPSPlayerFire : MonoBehaviour
 {
+    #region 멤버 변수
     private enum WeaponMode { NORMAL, Sniper }
     private WeaponMode w_mode;
 
@@ -14,14 +15,15 @@ public class FPSPlayerFire : MonoBehaviour
     private ParticleSystem ps;
     private Animator anim;
 
-    public GameObject weapon01_UI;
-    public GameObject weapon02_UI;
+    public GameObject weapon_normal_UI;
+    public GameObject weapon_sniper_UI;
 
-    public GameObject crosshair01_UI;
-    public GameObject crosshair02_UI;
+    public GameObject crosshair_normal_UI;
+    public GameObject crosshair_sniper_UI;
+    public GameObject crosshair_zoom_UI;
 
-    public GameObject weapon01_R_UI;
-    public GameObject weapon02_R_UI;
+    public GameObject weapon_normal_R_UI;
+    public GameObject weapon_sniper_R_UI;
 
     public TextMeshProUGUI w_mode_text_UI;
     public GameObject[] flash_effects;
@@ -29,7 +31,9 @@ public class FPSPlayerFire : MonoBehaviour
     public float throwPower = 10f;
     public int weaponPower = 5;
 
-    private bool zoom_mode;
+    public bool zoom_mode = false;
+
+    #endregion
 
 
     void Start()
@@ -47,7 +51,7 @@ public class FPSPlayerFire : MonoBehaviour
 
         LeftClick();
         RightClick();
-        WeaponSwap();
+        WeaponModeSwap();
     }
 
     private void RightClick()
@@ -65,8 +69,11 @@ public class FPSPlayerFire : MonoBehaviour
                                 * throwPower, ForceMode.Impulse);
                     break;
                 case WeaponMode.Sniper: // Sniper 모드일 시 마우스 우클릭 -> 확대/축소 조준경
-                    Camera.main.fieldOfView = this.zoom_mode == true ? 60f : 15f;
                     this.zoom_mode = !this.zoom_mode;
+                    Camera.main.fieldOfView = this.zoom_mode == true ? 15f : 60f;
+
+                    crosshair_sniper_UI.SetActive(!this.zoom_mode);
+                    crosshair_zoom_UI.SetActive(this.zoom_mode);
                     break;
             }
         }
@@ -104,7 +111,7 @@ public class FPSPlayerFire : MonoBehaviour
         }
     }
 
-    private void WeaponSwap()
+    private void WeaponModeSwap()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -112,6 +119,8 @@ public class FPSPlayerFire : MonoBehaviour
             Camera.main.fieldOfView = 60f;
             this.w_mode_text_UI.text = "Normal Mode";
             WeaponUIUpdate(true);
+            this.zoom_mode = false;
+            this.crosshair_zoom_UI.SetActive(false);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -119,19 +128,19 @@ public class FPSPlayerFire : MonoBehaviour
             this.w_mode_text_UI.text = "Sniper Mode";
             WeaponUIUpdate(false);
         }
-
     }
 
     private void WeaponUIUpdate(bool isNormal)
     {
-        this.weapon01_UI.SetActive(isNormal);
-        this.weapon02_UI.SetActive(!isNormal);
+        this.weapon_normal_UI.SetActive(isNormal);
+        this.weapon_sniper_UI.SetActive(!isNormal);
 
-        this.crosshair01_UI.SetActive(isNormal);
-        this.crosshair02_UI.SetActive(!isNormal);
+        this.crosshair_normal_UI.SetActive(isNormal);
+        this.crosshair_sniper_UI.SetActive(!isNormal);
+        
+        this.weapon_normal_R_UI.SetActive(isNormal);
+        this.weapon_sniper_R_UI.SetActive(!isNormal);
 
-        this.weapon01_R_UI.SetActive(isNormal);
-        this.weapon02_R_UI.SetActive(!isNormal);
     }
 
     IEnumerator ShootEffectOn(float duration)
