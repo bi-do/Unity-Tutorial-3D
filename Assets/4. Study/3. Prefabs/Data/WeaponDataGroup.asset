@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8781c8976f45b54080cab650bdd45f8, type: 3}
+  m_Name: WeaponDataGroup
+  m_EditorClassIdentifier: 
+  w_data:
+  - Name: Sword
+    dmg: 
+    range: 0
+    detail_data:
+      cost: 0
+      upgrade_lv: 0
+    damage_sys:
+      min_dmg: 0
+      max_dmg: 0
+      accuracy_rate: 0
+      critical_chance: 0
+  - Name: TwoHand Sword
+    dmg: 
+    range: 0
+    detail_data:
+      cost: 0
+      upgrade_lv: 0
+    damage_sys:
+      min_dmg: 0
+      max_dmg: 0
+      accuracy_rate: 0
+      critical_chance: 0
+  - Name: Hammer
+    dmg: 
+    range: 0
+    detail_data:
+      cost: 0
+      upgrade_lv: 0
+    damage_sys:
+      min_dmg: 0
+      max_dmg: 0
+      accuracy_rate: 0
+      critical_chance: 0
+  - Name: Spear
+    dmg: 
+    range: 0
+    detail_data:
+      cost: 0
+      upgrade_lv: 0
+    damage_sys:
+      min_dmg: 0
+      max_dmg: 0
+      accuracy_rate: 0
+      critical_chance: 0
+  - Name: Knife
+    dmg: 
+    range: 0
+    detail_data:
+      cost: 0
+      upgrade_lv: 0
+    damage_sys:
+      min_dmg: 0
+      max_dmg: 0
+      accuracy_rate: 0
+      critical_chance: 0
+  - Name: Blade
+    dmg: 
+    range: 0
+    detail_data:
+      cost: 0
+      upgrade_lv: 0
+    damage_sys:
+      min_dmg: 0
+      max_dmg: 0
+      accuracy_rate: 0
+      critical_chance: 0
+  - Name: Gun
+    dmg: 
+    range: 0
+    detail_data:
+      cost: 0
+      upgrade_lv: 0
+    damage_sys:
+      min_dmg: 0
+      max_dmg: 0
+      accuracy_rate: 0
+      critical_chance: 0
+  - Name: Wand
+    dmg: 
+    range: 0
+    detail_data:
+      cost: 0
+      upgrade_lv: 0
+    damage_sys:
+      min_dmg: 0
+      max_dmg: 0
+      accuracy_rate: 0
+      critical_chance: 0
+  - Name: 
+    dmg: 
+    range: 0
+    detail_data:
+      cost: 0
+      upgrade_lv: 0
+    damage_sys:
+      min_dmg: 0
+      max_dmg: 0
+      accuracy_rate: 0
+      critical_chance: 0
+  - Name: 
+    dmg: 
+    range: 0
+    detail_data:
+      cost: 0
+      upgrade_lv: 0
+    damage_sys:
+      min_dmg: 0
+      max_dmg: 0
+      accuracy_rate: 0
+      critical_chance: 0
