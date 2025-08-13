@@ -1,4 +1,4 @@
-using Unity.Mathematics;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,6 +20,9 @@ namespace Farm
         private float run_spd = 5f;
         private float turn_spd = 10f;
 
+        private Vector3 velocity;
+        private const float VIRTUAL_GRAVITY = -9.8f;
+
         void Awake()
         {
             cc = GetComponent<CharacterController>();
@@ -28,7 +31,11 @@ namespace Farm
 
         void Update()
         {
-            this.cc.Move(move_input * this.cur_spd * Time.deltaTime);
+            velocity.y += VIRTUAL_GRAVITY;
+
+            Vector3 dir = (move_input * cur_spd + Vector3.up * velocity.y);
+
+            this.cc.Move(dir * Time.deltaTime);
             Turn();
             SetMoveState();
         }
@@ -56,8 +63,6 @@ namespace Farm
 
             }
         }
-
-   
 
         /// <summary> 움직이는 상태에 따라 각 수치 상태 변환 </summary>
         private void SetMoveState()

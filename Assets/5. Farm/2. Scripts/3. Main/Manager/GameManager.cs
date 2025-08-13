@@ -3,9 +3,12 @@ using UnityEngine;
 public enum CamState { Outside, Field, House, Animal }
 namespace Farm
 {
-
     public class GameManager : Singleton<GameManager>
     {
+        // 매니저
+        public FieldManager field;
+        public UIManager UI;
+        public ItemManager item;
 
         public CamState cam_state = CamState.Outside;
 

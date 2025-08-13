@@ -1,3 +1,4 @@
+using Farm;
 using UnityEngine;
 
 public class FieldEvent : MonoBehaviour
@@ -9,6 +10,7 @@ public class FieldEvent : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Farm.GameManager.Instance.SetCamState(CamState.Field);
+            Farm.GameManager.Instance.UI.ActivateFieldUI(true);
 
         }
     }
@@ -18,6 +20,7 @@ public class FieldEvent : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Farm.GameManager.Instance.SetCamState(CamState.Outside);
+            Farm.GameManager.Instance.UI.ActivateFieldUI(false);
 
         }
     }
