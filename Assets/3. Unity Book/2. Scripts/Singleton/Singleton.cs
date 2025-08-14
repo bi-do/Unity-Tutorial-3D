@@ -2,9 +2,7 @@ using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : Component
 {
-    private static T instance;
-    public static int gm_index;
-    private int my_index;
+    protected static T instance;
     public static T Instance
     {
         get

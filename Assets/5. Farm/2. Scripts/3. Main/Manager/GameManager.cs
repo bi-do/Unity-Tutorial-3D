@@ -1,6 +1,6 @@
 using Unity.Cinemachine;
 using UnityEngine;
-public enum CamState { Outside, Field, House, Animal }
+public enum CamState { Outside, Field, House, Animal , Board }
 namespace Farm
 {
     public class GameManager : Singleton<GameManager>

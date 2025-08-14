@@ -28,15 +28,15 @@ public class Fade : MonoBehaviour
 
     private void OnFade(float fade_time, Color color, bool isFadein, Action fade_complete_act)
     {
-        StartCoroutine(FadeRoutine(fade_time, color, isFadein));
-        fade_complete_act?.Invoke();
+        StartCoroutine(FadeRoutine(fade_time, color, isFadein,fade_complete_act));
     }
 
-    IEnumerator FadeRoutine(float fade_time, Color color, bool isFadein)
+    IEnumerator FadeRoutine(float fade_time, Color color, bool isFadein, Action fade_complete_act)
     {
         Fade_Image_UI.raycastTarget = true;
         float timer = 0f;
         float percent = 0f;
+        Debug.Log("Fade 중");
 
         while (percent < 1f)
         {
@@ -48,5 +48,6 @@ public class Fade : MonoBehaviour
             yield return null;
         }
         Fade_Image_UI.raycastTarget = false;
+        fade_complete_act?.Invoke();
     }
 }

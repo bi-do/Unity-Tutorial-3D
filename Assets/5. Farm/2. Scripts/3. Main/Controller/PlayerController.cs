@@ -9,8 +9,6 @@ namespace Farm
         private Animator anim;
         private string anim_move_float = "Move";
 
-        // private PlayerInput player_input;
-
         private CharacterController cc;
         private Vector3 move_input;
         private bool isRun;
@@ -25,8 +23,11 @@ namespace Farm
 
         void Awake()
         {
+            int character_idx = LoadSceneManager.Instance.character_idx; 
             cc = GetComponent<CharacterController>();
-            anim = GetComponent<Animator>();
+
+            this.transform.GetChild(character_idx).gameObject.SetActive(true);
+            anim = this.transform.GetChild(character_idx).GetComponent<Animator>();
         }
 
         void Update()
