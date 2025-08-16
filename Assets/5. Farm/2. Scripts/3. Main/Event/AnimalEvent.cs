@@ -53,7 +53,8 @@ public class AnimalEvent : MonoBehaviour
             Farm.GameManager.Instance.SetCamState(CamState.Outside);
         }
     }
-
+    
+    /// <summary> 랜덤한 위치 생성 및 SetFlag 호출 </summary>
     private void SetRandomPos()
     {
         float random_x = Random.Range(box_col.bounds.min.x, box_col.bounds.max.x);
@@ -61,9 +62,10 @@ public class AnimalEvent : MonoBehaviour
 
         Vector3 random_pos = new Vector3(random_x, 0, random_z);
 
-        SetFlag(random_pos , true);
+        SetFlag(random_pos, true);
     }
 
+    /// <summary> 플래그 활성/비활성화 및 Positon 설정 </summary>
     private void SetFlag(Vector3 param_pos, bool isActive)
     {
         flag.transform.SetParent(transform);

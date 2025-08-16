@@ -12,9 +12,11 @@ namespace Farm
         [SerializeField] private GameObject seed_UI;
         [SerializeField] private GameObject inventory_UI;
 
+        #region Board UI 멤버 변수
         [SerializeField] private GameObject select_board_UI;
         [SerializeField] private GameObject single_board_UI;
         [SerializeField] private GameObject AI_board_UI;
+        #endregion
 
         [SerializeField] private Button single_board_btn;
         [SerializeField] private Button AI_board_btn;
@@ -27,7 +29,8 @@ namespace Farm
         {
             this.seed_btn.onClick.AddListener(OnSeedBtn);
             this.harvest_btn.onClick.AddListener(OnHarvestBtn);
-            
+
+            // 보드 게임 PVP & PVE 선택 화면 버튼 OnClick 이벤트 추가
             single_board_btn.onClick.AddListener(() =>
             {
                 single_board_UI.SetActive(true);

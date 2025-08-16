@@ -36,11 +36,11 @@ public class Single_BoardController : MonoBehaviour
         status_txt.text = "Player X Turn";
         restart_btn.gameObject.SetActive(false);
 
+        // 셀 초기화 및 생성
         for (int i = 0; i < cell_group.childCount; i++)
         {
             Destroy(cell_group.GetChild(i).gameObject);
         }
-
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)

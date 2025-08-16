@@ -33,6 +33,7 @@ public class AnimalController : MonoBehaviour
             SetRandomDst();
             anim.SetBool(anim_bool_walk, true);
 
+            // Agent가 길을 찾지 못하고 , agent의 목적지 남은 거리가 stop 거리보다 작을ㄸ
             yield return new WaitUntil(() => !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance);
 
             anim.SetBool(anim_bool_walk, false);
@@ -43,6 +44,8 @@ public class AnimalController : MonoBehaviour
 
     private void SetRandomDst()
     {
+        // Random.Random.insideUnitSphere 은 Vector3.zero (원점) 기준 반지름이 1인 구 안에서의 무작위 벡터값을 뱉음
+        // 반지름을 곱해주면 ( wander_radius ) 랜덤한 벡터값의 범위 증가
         Vector3 random_dir = Random.insideUnitSphere * wander_radius;
         random_dir += this.transform.position;
 
